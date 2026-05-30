@@ -25,12 +25,124 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 | `npm run build` | Typecheck + production build |
 | `npm run lint` | ESLint |
 | `npm run preview` | Preview production build |
+| `npm run create-page -- <name>` | Scaffold a new page + register route (see below) |
+
+---
+
+## `create-page` script (recommended)
+
+Use the generator when starting a new demo so you do not hand-edit `routes.tsx` or forget the CSS import.
+
+**Script:** `scripts/create-page.mjs`  
+**Command:** `npm run create-page -- <page-name>`
+
+### Usage
+
+```bash
+# Basic
+npm run create-page -- my-demo
+
+# Multi-word names — quote the argument
+npm run create-page -- "Post Filters"
+
+# Help
+npm run create-page -- --help
+```
+
+You can also run it directly:
+
+```bash
+node scripts/create-page.mjs my-demo
+```
+
+### What the script creates
+
+| Output | Path |
+|--------|------|
+| Page component | `src/pages/<slug>/<slug>.tsx` |
+| Page styles | `src/pages/<slug>/<slug>.css` |
+| Route + import | `src/config/routes.tsx` (appended automatically) |
+
+The generated **tsx** includes:
+
+- `import './<slug>.css'`
+- A fragment with `<h1>`, placeholder `<p>`, and a `btn-primary` button
+- A default export named in **PascalCase** (e.g. `DummyPage`)
+
+The generated **css** includes scoped `.practice-page--<slug> .btn-primary` styles using design tokens (`--cta`, `--cta-hover`). Copy more blocks from other pages as needed (see [Styling guide](#styling-guide-read-this-for-uniform-ui)).
+
+### How names are converted
+
+| You type | Slug (folder / URL) | Component | Nav label |
+|----------|---------------------|-----------|-----------|
+| `my-demo` | `my-demo` | `MyDemo` | My Demo |
+| `Post Filters` | `post-filters` | `PostFilters` | Post Filters |
+| `dummyPage` | `dummy-page` | `DummyPage` | Dummy Page |
+
+- **Slug** — kebab-case; used for `src/pages/<slug>/`, path `/<slug>`, and CSS class `.practice-page--<slug>`
+- **Component** — PascalCase; used for the React export and `routes.tsx` import
+- **Label** — Title Case words; shown in the expanded sidebar (collapsed thumbs use initials, e.g. “Dummy Page” → `DP`)
+
+### What gets added to `routes.tsx`
+
+The script inserts:
+
+```tsx
+import MyDemo from '../pages/my-demo/my-demo';
+
+// …inside practiceRoutes (at the end of the array):
+{
+  path: '/my-demo',
+  label: 'My Demo',
+  slug: 'my-demo',
+  element: withShell('my-demo', MyDemo),
+},
+```
+
+The sidebar picks up the new page immediately—no extra nav config.
+
+### After running the script
+
+1. `npm run dev`
+2. Open `http://localhost:5173/<slug>`
+3. Replace placeholder copy and build your demo in `<slug>.tsx`
+4. Extend `<slug>.css` — copy patterns from an existing page (cards, tabs, search, etc.)
+
+Example scaffold (from `npm run create-page -- dummy-page`):
+
+- `src/pages/dummy-page/dummy-page.tsx`
+- `src/pages/dummy-page/dummy-page.css`
+- Route: `/dummy-page`
+
+### Errors the script handles
+
+| Situation | Behavior |
+|-----------|----------|
+| Page folder already exists | Exits with error; does not overwrite |
+| Route slug already in `routes.tsx` | Exits with error |
+| Empty or invalid name | Exits with usage hint |
+| `--help` / `-h` | Prints usage and exits |
+
+The script does **not** delete pages or remove routes—only creates new ones.
+
+### Script vs manual setup
+
+| Step | Script | Manual |
+|------|--------|--------|
+| Create tsx + css | Automatic | You create files |
+| Import in `routes.tsx` | Automatic | You add import |
+| Route in `practiceRoutes` | Automatic | You add object |
+| Demo logic & extra styles | You edit after | You edit after |
+
+Use the [manual checklist](#add-a-new-page-manual-checklist) only if you prefer not to run the script.
 
 ---
 
 ## How the app is structured
 
 ```
+scripts/
+  create-page.mjs          CLI: scaffold page + update routes
 src/
   main.tsx                 Entry: router + global CSS
   app/
@@ -77,7 +189,9 @@ Use **kebab-case** for folders and files:
 
 ---
 
-## Add a new page (checklist)
+## Add a new page (manual checklist)
+
+Use `npm run create-page -- <name>` to automate steps 1–3, or follow this list by hand.
 
 ### 1. Create the folder and component
 
@@ -307,6 +421,7 @@ Edit CSS variables in `src/styles/global.css` only. Page CSS should reference `v
 | `/infinite-scroll` | `infinite-scroll` | `IntersectionObserver` infinite list |
 | `/modal` | `modal` | `createPortal` modal |
 | `/toasts` | `toasts` | Context provider + toast portal |
+| `/dummy-page` | `dummy-page` | Scaffold example (`npm run create-page`) |
 
 `src/pages/typescript/typescript-notes.ts` is scratch notes only—not routed.
 
@@ -316,7 +431,9 @@ Edit CSS variables in `src/styles/global.css` only. Page CSS should reference `v
 
 | Problem | Fix |
 |---------|-----|
-| New page not in nav | Add to `practiceRoutes` in `routes.tsx` (don’t set `hideInNav: true`) |
+| Start a new page quickly | `npm run create-page -- <name>` |
+| `create-page` says already exists | Pick a new name or delete the old `src/pages/<slug>/` folder and route entry |
+| New page not in nav | Add to `practiceRoutes` in `routes.tsx`, or re-run script with a new name (don’t set `hideInNav: true`) |
 | Styles not applying | Import `./<slug>.css` in tsx; scope selectors with `.practice-page--<slug>` |
 | Content too wide | Don’t set `max-width` on page root—shell handles it |
 | Double nav highlight (collapsed) | Style only `.app-nav__thumb` when collapsed—see `app.css` |
