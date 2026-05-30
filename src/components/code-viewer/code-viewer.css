@@ -1,0 +1,8 @@
+.code-viewer {
+	overflow: hidden;
+	border-radius: var(--radius-sm);
+}
+
+.code-viewer pre {
+	margin: 0 !important;
+}

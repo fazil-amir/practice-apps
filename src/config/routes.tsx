@@ -7,7 +7,9 @@ import Toasts from '../pages/toasts/toasts';
 import PostSearchDebounce from '../pages/post-search-debounce/post-search-debounce';
 import InfiniteScroll from '../pages/infinite-scroll/infinite-scroll';
 import Modal from '../pages/modal/modal';
-import Javascript from '../pages/javascript/javascript';
+import ArrayPolyfills from '../pages/array-polyfills/array-polyfills';
+import Scoping from '../pages/scoping/scoping';
+import Promises from '../pages/promises/promises';
 export type PracticeRoute = {
   path: string;
   label: string;
@@ -39,13 +41,25 @@ export const practiceRoutes: PracticeRoute[] = [
     label: 'Home',
     slug: 'home',
     hideInNav: true,
-    element: <Navigate to="/javascript" replace />,
+    element: <Navigate to="/array-polyfills" replace />,
   },
   {
-    path: '/javascript',
-    label: 'Javascript',
-    slug: 'javascript',
-    element: withShell('javascript', Javascript),
+    path: '/array-polyfills',
+    label: 'Array Polyfills',
+    slug: 'array-polyfills',
+    element: withShell('array-polyfills', ArrayPolyfills),
+  },
+  {
+    path: '/scoping',
+    label: 'Scoping',
+    slug: 'scoping',
+    element: withShell('scoping', Scoping),
+  },
+  {
+    path: '/promises',
+    label: 'Promises',
+    slug: 'promises',
+    element: withShell('promises', Promises),
   },
   {
     path: '/post-pagination',

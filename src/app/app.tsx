@@ -83,7 +83,7 @@ export default function App() {
             {practiceRoutes.map(({ path, element }) => (
               <Route key={path} path={path} element={element} />
             ))}
-            <Route path="*" element={<Navigate to="/javascript" replace />} />
+            <Route path="*" element={<Navigate to="/array-polyfills" replace />} />
           </Routes>
         </main>
       </div>
