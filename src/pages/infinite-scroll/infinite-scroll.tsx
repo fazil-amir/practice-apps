@@ -1,3 +1,4 @@
+import './infinite-scroll.css';
 import { useState, useEffect, useRef } from "react";
 
 const LIMIT = 10;
@@ -9,7 +10,6 @@ type Post = {
 	body: string,
 }
 
-// FETCH SERVICE
 const fetchPosts = async (page = 1, limit = LIMIT): Promise<Post[]> => {
 	try {
 		const url = new URL(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`);
@@ -24,7 +24,6 @@ const fetchPosts = async (page = 1, limit = LIMIT): Promise<Post[]> => {
 	}
 }
 
-// FETCH HOOK
 const useFetchPost = () => {
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -58,9 +57,9 @@ const useFetchPost = () => {
 
 export default function InfiniteScroll() {
 	const { isLoading, error, postData, callFetchPosts } = useFetchPost();
-	
+
 	const [page, setPage] = useState(1);
-	
+
 	const sentinelElementRef = useRef<HTMLDivElement | null>(null)
 
 	const postEnded = !!(postData.length >= MAX_COUNT);
@@ -93,35 +92,27 @@ export default function InfiniteScroll() {
 	}, [isLoading]);
 
 	return (
-		<div style={{ ...styles.container }}>
+		<>
 			<h1>Infinite Scroll</h1>
-			{
-				postData.map(p => (
-					<div key={p.id} style={{ ...styles.card }}>
-						<h2>{p.title}</h2>
-						<p>{p.body}</p>
-					</div>
-				))
-			}
+			{postData.map((p) => (
+				<article key={p.id} className="practice-card">
+					<h2>{p.title}</h2>
+					<p>{p.body}</p>
+				</article>
+			))}
 
-			{!!postData.length && <div ref={sentinelElementRef} />}
+			{!!postData.length && <div ref={sentinelElementRef} aria-hidden />}
 
-			{!!isLoading && <p>Loading...</p>}
-			{!!error && <p>error</p>}
-			<button onClick={() => setPage(pv => pv + 1)} disabled={postEnded}>Load more</button>
-		</div>
+			{!!isLoading && <p className="practice-status">Loading...</p>}
+			{!!error && <p className="practice-status practice-status--error">Something went wrong.</p>}
+			<button
+				type="button"
+				className="btn-primary"
+				onClick={() => setPage((pv) => pv + 1)}
+				disabled={postEnded}
+			>
+				Load more
+			</button>
+		</>
 	)
-}
-
-const styles = {
-  container: {
-    margin: '0 auto',
-    padding: '20px',
-  },
-  card: {
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    padding: '16px',
-    marginBottom: '16px',
-  },
 }

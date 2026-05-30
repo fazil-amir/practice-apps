@@ -1,3 +1,4 @@
+import './post-search-debounce.css';
 import { useEffect, useState } from "react";
 
 const fetchPosts = async (query: string) => {
@@ -58,42 +59,35 @@ export default function PostSearchDebounce() {
   const { results, loading, error } = useFetchPost(query);
 
   return (
-    <div style={{ ...styles.container as React.CSSProperties }}>
-
+    <>
       <h1>Post Search with Debounce</h1>
 
-      <input type="text" placeholder="Search posts..." style={{ ...styles.input as React.CSSProperties }} value={query} onChange={e => setQuery(e.target.value)} />
+      <input
+        type="text"
+        className="page-search"
+        placeholder="Search posts..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
 
-      {loading && <p>Loading...</p>}
+      {loading && <p className="practice-status">Loading...</p>}
 
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+      {error && <p className="practice-status practice-status--error">Error: {error}</p>}
 
-      {
-        results.length > 0 && (
-          <ul>
-            {results.map((post: any) => (
-              <li key={post.id}>
-                <h2>{post.title}</h2>
-                <p>{post.body}</p>
-              </li>
-            ))}
-          </ul>
-        )
-      }
+      {results.length > 0 && (
+        <ul className="practice-list">
+          {results.map((post: { id: number; title: string; body: string }) => (
+            <li key={post.id} className="practice-list__item">
+              <h2>{post.title}</h2>
+              <p>{post.body}</p>
+            </li>
+          ))}
+        </ul>
+      )}
 
-      {query.trim() !== '' && results.length === 0 && !loading && !error && <p>No results found.</p>}
-
-    </div>
+      {query.trim() !== '' && results.length === 0 && !loading && !error && (
+        <p className="practice-status">No results found.</p>
+      )}
+    </>
   )
-}
-
-const styles = {
-  container: {
-    maxWidth: '1024px',
-    width: '100%',
-    margin: '0 auto',
-  },
-  input: {
-   width: '100%', padding: '8px', boxSizing: 'border-box'
-  }
 }

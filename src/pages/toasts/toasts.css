@@ -1,0 +1,82 @@
+.practice-page--toasts .page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.practice-page--toasts .btn-success {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+
+.practice-page--toasts .btn-success:hover:not(:disabled) {
+  background: var(--success-hover);
+  border-color: var(--success-hover);
+}
+
+.practice-page--toasts .btn-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+.practice-page--toasts .btn-danger:hover:not(:disabled) {
+  background: var(--danger-hover);
+  border-color: var(--danger-hover);
+}
+
+.practice-page--toasts .btn-info {
+  background: var(--info);
+  border-color: var(--info);
+  color: #fff;
+}
+
+.practice-page--toasts .btn-info:hover:not(:disabled) {
+  background: var(--info-hover);
+  border-color: var(--info-hover);
+}
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-radius: var(--radius-sm);
+  min-width: 220px;
+  font-size: 0.875rem;
+  color: #fff;
+  box-shadow: var(--shadow);
+  animation: slideIn 0.25s ease;
+}
+
+.toast--success {
+  background-color: var(--success);
+}
+
+.toast--error {
+  background-color: var(--danger);
+}
+
+.toast--info {
+  background-color: var(--palette-navy);
+}
+
+.toast__close {
+  padding: 2px 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: inherit;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}

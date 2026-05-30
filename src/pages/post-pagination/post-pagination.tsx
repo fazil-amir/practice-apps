@@ -1,12 +1,13 @@
+import './post-pagination.css';
 import { useEffect, useState } from 'react'
-import { fetchPosts } from '../services/post-pagination.service' 
+import { fetchPosts } from '../../services/post-pagination.service'
 
 const LIMIT = 5;
 
 function PostPagination() {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  
+
   useEffect(() => {
     fetchPosts()
       .then((data) => setPosts(data))
@@ -22,42 +23,24 @@ function PostPagination() {
   }
 
   return (
-    <div style={{ ...styles.container }}>
+    <>
       <h1>Post Pagination</h1>
-      {posts.slice(currentPage, currentPage + LIMIT).map((post: any) => (
-        <div key={post.id} style={{ ...styles.card }}>
+      {posts.slice(currentPage, currentPage + LIMIT).map((post: { id: number; title: string; body: string }) => (
+        <article key={post.id} className="practice-card">
           <h2>({post.id}): {post.title}</h2>
           <p>{post.body}</p>
-        </div>
+        </article>
       ))}
-      <div style={{ ...styles.pagination }}>
-        <button onClick={handlePrevious} disabled={currentPage === 0}>
+      <div className="page-pagination">
+        <button type="button" onClick={handlePrevious} disabled={currentPage === 0}>
           Previous
         </button>
-        <button onClick={handleNext} disabled={currentPage + LIMIT >= posts.length}>
+        <button type="button" onClick={handleNext} disabled={currentPage + LIMIT >= posts.length}>
           Next
         </button>
       </div>
-    </div>
+    </>
   )
-}
-
-const styles = {
-  container: {
-    width: '1024px',
-    margin: '0 auto',
-    padding: '20px',
-  },
-  card: {
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    padding: '16px',
-    marginBottom: '16px',
-  },
-  pagination: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
 }
 
 export default PostPagination

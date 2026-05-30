@@ -1,0 +1,10 @@
+.practice-page--javascript .btn-primary {
+  background: var(--cta);
+  border-color: var(--cta);
+  color: #fff;
+}
+
+.practice-page--javascript .btn-primary:hover:not(:disabled) {
+  background: var(--cta-hover);
+  border-color: var(--cta-hover);
+}

@@ -19,11 +19,11 @@ interface Toast {
 
 const ToastContainer = ({ toasts, removeToast }: { toasts: Toast[]; removeToast: (id: string) => void }) => {
   return createPortal(
-    <div id="toast-container" style={{ ...styles.toastContainer as React.CSSProperties }}>
+    <div id="toast-container" className="toast-container">
       {toasts.map((toast) => (
-        <div key={toast.id} style={{ ...styles.toast as React.CSSProperties, ...styles[toast.type] as React.CSSProperties }}>
-          {toast.message}
-          <button style={{ marginLeft: '10px' }} onClick={() => removeToast(toast.id)}>
+        <div key={toast.id} className={`toast toast--${toast.type}`}>
+          <span>{toast.message}</span>
+          <button type="button" className="toast__close" onClick={() => removeToast(toast.id)}>
             X
           </button>
         </div>
@@ -45,8 +45,6 @@ export const ToastsProvider = ({ children }: ToastsProviderProps) => {
   }
 
   const removeToast = (id: string) => {
-    console.log('Removing toast with id:', id);
-
     const timeoutId = toastTimeoutRef.current.get(id);
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -75,31 +73,3 @@ export const useToasts = () => {
   }
   return context;
 }
-
-const styles = {
-  toastContainer: {
-    position: 'fixed',
-    top: '20px',
-    right: '20px',
-    zIndex: 9999,
-  },
-  toast: {
-    padding: '5px 10px',
-    marginBottom: '10px',
-    borderRadius: '4px',
-    minWidth: '200px',
-    fontSize: '14px',
-  },
-  success: {
-    backgroundColor: '#4CAF50',
-    color: 'white',
-  },
-  error: {
-    backgroundColor: '#F44336',
-    color: 'white',
-  },
-  info: {
-    backgroundColor: '#2196F3',
-    color: 'white',
-  },
-};

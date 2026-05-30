@@ -1,4 +1,4 @@
-import type { TabDataType } from '../../pages/tab-data';
+import type { TabDataType } from './tab-data';
 
 interface ProfileTabProps {
 	data: TabDataType;

@@ -1,0 +1,77 @@
+/* Shell layout only — page-specific styles live in src/pages/<slug>/ */
+
+.page-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-layout,
+.practice-page__inner {
+  max-width: var(--layout-max);
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--page-padding);
+  box-sizing: border-box;
+}
+
+.practice-page {
+  width: 100%;
+  padding-block: var(--page-padding);
+}
+
+.practice-page h1 {
+  margin: 0 0 20px;
+  font-family: var(--heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-h);
+  letter-spacing: -0.02em;
+}
+
+.practice-page h2 {
+  margin: 0 0 12px;
+  font-family: var(--heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.practice-page p {
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.practice-page ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.practice-page button {
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-h);
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.practice-page button:hover:not(:disabled) {
+  background: var(--surface-muted);
+  border-color: var(--accent-border);
+}
+
+.practice-page button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.practice-page button:focus-visible {
+  outline: 2px solid var(--accent-border);
+  outline-offset: 2px;
+}

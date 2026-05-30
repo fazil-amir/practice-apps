@@ -1,0 +1,32 @@
+.practice-page--infinite-scroll .practice-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.practice-page--infinite-scroll .practice-card h2 {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.practice-page--infinite-scroll .practice-status {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.practice-page--infinite-scroll .practice-status--error {
+  color: var(--danger);
+}
+
+.practice-page--infinite-scroll .btn-primary {
+  background: var(--cta);
+  border-color: var(--cta);
+  color: #fff;
+}
+
+.practice-page--infinite-scroll .btn-primary:hover:not(:disabled) {
+  background: var(--cta-hover);
+  border-color: var(--cta-hover);
+}

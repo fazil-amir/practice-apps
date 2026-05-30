@@ -1,0 +1,19 @@
+.practice-page--post-pagination .practice-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.practice-page--post-pagination .practice-card h2 {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.practice-page--post-pagination .page-pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 4px;
+}

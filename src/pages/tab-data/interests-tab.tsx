@@ -1,4 +1,4 @@
-import type { TabDataType } from '../../pages/tab-data';
+import type { TabDataType } from './tab-data';
 
 interface InterestsTabProps {
 	data: TabDataType;
@@ -37,11 +37,11 @@ export default function InterestsTab({ data, setData }: InterestsTabProps) {
 	return (
 		<div>
 			<h2>Interests</h2>
-			{INTERESTS.map((interest, index) => (
-				<div key={index}>
+			{INTERESTS.map((interest) => (
+				<label key={interest} className="checkbox-row">
 					<input type="checkbox" checked={isChecked(interest)} value={interest} onChange={handleOnChange} />
 					{interest}
-				</div>
+				</label>
 			))}
 		</div>
 	);
