@@ -61,7 +61,7 @@ export default function ${componentName}() {
     <>
       <h1>${label}</h1>
       <p>Replace this with your demo content.</p>
-      <button type="button" className="btn-primary">
+      <button type="button" className="primary-btn">
         Action
       </button>
     </>
@@ -71,17 +71,7 @@ export default function ${componentName}() {
 }
 
 function pageCss(slug) {
-  return `.practice-page--${slug} .btn-primary {
-  background: var(--cta);
-  border-color: var(--cta);
-  color: #fff;
-}
-
-.practice-page--${slug} .btn-primary:hover:not(:disabled) {
-  background: var(--cta-hover);
-  border-color: var(--cta-hover);
-}
-`;
+  return `/* Page-specific styles for ${slug}. Shared utilities: src/styles/shared.css */\n`;
 }
 
 function updateRoutes(slug, componentName, label) {

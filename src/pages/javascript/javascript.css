@@ -1,10 +1,31 @@
-.practice-page--javascript .btn-primary {
-  background: var(--cta);
-  border-color: var(--cta);
-  color: #fff;
+.practice-page--javascript .js-demo-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-.practice-page--javascript .btn-primary:hover:not(:disabled) {
-  background: var(--cta-hover);
-  border-color: var(--cta-hover);
+.practice-page--javascript .js-demo {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 16px;
+	background: var(--surface);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+}
+
+.practice-page--javascript .js-demo h2 {
+	margin: 0;
+	font-size: 1rem;
+}
+
+.practice-page--javascript .js-demo__desc {
+	margin: 0;
+}
+
+.practice-page--javascript .js-demo__desc code {
+	font-family: var(--mono);
+	font-size: 0.8125rem;
+	color: var(--text-muted);
 }

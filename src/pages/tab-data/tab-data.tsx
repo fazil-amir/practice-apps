@@ -1,4 +1,3 @@
-import './tab-data.css';
 import { useState } from 'react'
 import ProfileTab from './profile-tab';
 import InterestsTab from './interests-tab';
@@ -81,19 +80,19 @@ export default function TabData() {
 			<div className="tab-footer">
 				<div>
 					{activeTabIndex > 0 && (
-						<button type="button" onClick={() => handleTabChange(activeTabIndex - 1)}>
+						<button type="button" className="secondary-btn" onClick={() => handleTabChange(activeTabIndex - 1)}>
 							Previous
 						</button>
 					)}
 				</div>
 				<div>
 					{activeTabIndex < TABS.length - 1 && (
-						<button type="button" onClick={() => handleTabChange(activeTabIndex + 1)}>
+						<button type="button" className="secondary-btn" onClick={() => handleTabChange(activeTabIndex + 1)}>
 							Next
 						</button>
 					)}
 					{activeTabIndex === TABS.length - 1 && (
-						<button type="button" className="btn-primary" onClick={() => console.log(data)}>
+						<button type="button" className="primary-btn" onClick={() => console.log(data)}>
 							Submit
 						</button>
 					)}

@@ -17,6 +17,7 @@ export default function ProfileTab({ data, setData }: ProfileTabProps) {
 			<div className="input-group">
 				<label>Name:</label>
 				<input
+					className="field-input"
 					type="text"
 					placeholder="Enter your name"
 					value={data.name}
@@ -26,6 +27,7 @@ export default function ProfileTab({ data, setData }: ProfileTabProps) {
 			<div className="input-group">
 				<label>Age:</label>
 				<input
+					className="field-input"
 					type="number"
 					placeholder="Enter your age"
 					value={data.age}
@@ -35,6 +37,7 @@ export default function ProfileTab({ data, setData }: ProfileTabProps) {
 			<div className="input-group">
 				<label>Email:</label>
 				<input
+					className="field-input"
 					type="email"
 					placeholder="Enter your email"
 					value={data.email}

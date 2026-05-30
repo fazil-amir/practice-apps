@@ -1,4 +1,3 @@
-import './post-pagination.css';
 import { useEffect, useState } from 'react'
 import { fetchPosts } from '../../services/post-pagination.service'
 
@@ -32,10 +31,10 @@ function PostPagination() {
         </article>
       ))}
       <div className="page-pagination">
-        <button type="button" onClick={handlePrevious} disabled={currentPage === 0}>
+        <button type="button" className="secondary-btn" onClick={handlePrevious} disabled={currentPage === 0}>
           Previous
         </button>
-        <button type="button" onClick={handleNext} disabled={currentPage + LIMIT >= posts.length}>
+        <button type="button" className="secondary-btn" onClick={handleNext} disabled={currentPage + LIMIT >= posts.length}>
           Next
         </button>
       </div>

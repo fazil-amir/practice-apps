@@ -31,7 +31,7 @@ function withShell(slug: string, Component: ComponentType) {
 
 /**
  * Single source of truth for routes and navigation.
- * Add a page: import from `src/pages/<slug>/<slug>.tsx`, add `<slug>.css` in that folder, and register here.
+ * Add a page: import from `src/pages/<slug>/<slug>.tsx`, optional `<slug>.css` for demo-only styles, register here.
  */
 export const practiceRoutes: PracticeRoute[] = [
   {

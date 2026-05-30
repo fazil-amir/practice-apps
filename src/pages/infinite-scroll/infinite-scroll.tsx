@@ -1,4 +1,3 @@
-import './infinite-scroll.css';
 import { useState, useEffect, useRef } from "react";
 
 const LIMIT = 10;
@@ -107,7 +106,7 @@ export default function InfiniteScroll() {
 			{!!error && <p className="practice-status practice-status--error">Something went wrong.</p>}
 			<button
 				type="button"
-				className="btn-primary"
+				className="primary-btn"
 				onClick={() => setPage((pv) => pv + 1)}
 				disabled={postEnded}
 			>

@@ -1,4 +1,3 @@
-import './modal.css';
 import { useState } from 'react'
 import { createPortal } from 'react-dom';
 
@@ -15,7 +14,7 @@ const ModalImpl = ({ visible, setIsVisible }: { visible: boolean; setIsVisible: 
 		>
 			<div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
 				<h2>Modal Header</h2>
-				<button type="button" onClick={() => setIsVisible(false)}>Close</button>
+				<button type="button" className="secondary-btn" onClick={() => setIsVisible(false)}>Close</button>
 			</div>
 		</div>,
 		document.getElementById('root') || document.body
@@ -27,7 +26,7 @@ export default function Modal() {
 	return (
 		<>
 			<h1>Modal</h1>
-			<button type="button" className="btn-primary" onClick={() => setIsVisible(true)}>
+			<button type="button" className="primary-btn" onClick={() => setIsVisible(true)}>
 				Open Modal
 			</button>
 			<ModalImpl visible={visible} setIsVisible={setIsVisible} />

@@ -77,10 +77,10 @@ Every page is wrapped by the shell (max width **1200px** — no extra wrapper ne
 | Layer | File | Use for |
 | --- | --- | --- |
 | Tokens | `global.css` | Colors, spacing, shadows, radii |
-| Shell | `shared.css` | Page chrome, typography, base buttons |
-| Page | `<slug>.css` | Demo-only styles — prefix `.practice-page--<slug>` |
+| Shell | `shared.css` | Layout, typography, global utility classes |
+| Page | `<slug>.css` | Demo-only overrides — prefix `.practice-page--<slug>` |
 
-One page only → page CSS. Every page → `shared.css`. Theme values → `global.css`.
+Shared UI → `shared.css`. Theme tokens → `global.css`. Page CSS only when a demo needs something unique.
 
 ### Design tokens
 
@@ -108,20 +108,19 @@ Use CSS variables from `global.css` instead of hard-coded colors:
 
 ### Built-in (no extra CSS)
 
-`<h1>`, `<h2>`, `<p>`, `<ul>`, plain `<button>`, and `page-stack` spacing work on every page.
+`<h1>`, `<h2>`, `<p>`, `<ul>`, and `page-stack` spacing work on every page. Use utility classes for buttons and forms — not unstyled `<button>`.
 
-### Reusable patterns
+### Global utility classes (`shared.css`)
 
-Not global — copy the block from an existing page and change the slug prefix:
-
-| Class | Copy from |
+| Class | Use for |
 | --- | --- |
-| `btn-primary` | `javascript.css` |
-| `btn-success` / `danger` / `info` | `toasts.css` |
-| `practice-card` | `post-pagination.css` |
-| `practice-list`, `practice-list__item` | `post-search-debounce.css` |
-| `practice-status`, `practice-status--error` | `post-search-debounce.css` |
-| `page-search`, `page-pagination` | `post-search-debounce.css`, `post-pagination.css` |
-| `tab-bar`, `tab`, `tab--active`, `tab-panel` | `tab-data.css` |
-| `modal-overlay`, `modal-dialog` | `modal.css` |
-| `toast-container`, `toast`, `toast--*` | `toasts.css` |
+| `primary-btn`, `secondary-btn` | Main and neutral actions |
+| `success-btn`, `danger-btn`, `info-btn` | Semantic actions |
+| `practice-card`, `practice-list`, `practice-list__item` | Cards and lists |
+| `practice-status`, `practice-status--error` | Loading / empty / error text |
+| `field-input`, `input-group`, `checkbox-row` | Forms |
+| `page-actions`, `page-pagination` | Button rows / pagination bar |
+| `tab-bar`, `tab`, `tab--active`, `tab-panel`, `tab-footer` | Tabs |
+| `modal-overlay`, `modal-dialog` | Modal portal |
+| `toast-container`, `toast`, `toast--*` | Toast portal |
+| `code-output` | Monospace result blocks |
