@@ -1,4 +1,4 @@
-# Practice Apps
+# Frontend Practice Sandbox
 
 [![React](https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -8,15 +8,15 @@
 
 > React demos on isolated routes — pagination, search, tabs, modals, toasts, infinite scroll, and more.
 
-**Repo:** [github.com/fazil-amir/practice-apps](https://github.com/fazil-amir/practice-apps)
+**Repo:** [github.com/fazil-amir/frontend-practice-sandbox](https://github.com/fazil-amir/frontend-practice-sandbox)
 
 ## Quick start
 
 Node 20+ required.
 
 ```bash
-git clone git@github.com:fazil-amir/practice-apps.git
-cd practice-apps
+git clone git@github.com:fazil-amir/frontend-practice-sandbox.git
+cd frontend-practice-sandbox
 npm install
 npm run dev
 ```
@@ -45,36 +45,6 @@ npm run create-page -- --help
 | `Post Filters` | `/post-filters` | `PostFilters` | Post Filters |
 
 Output: `src/pages/<slug>/<slug>.tsx`, `<slug>.css`, and a route in `src/config/routes.tsx`.
-
-### Manual setup
-
-`src/pages/my-demo/my-demo.tsx`:
-
-```tsx
-import "./my-demo.css";
-
-export default function MyDemo() {
-  return (
-    <>
-      <h1>My Demo</h1>
-      <p>What this demo does.</p>
-    </>
-  );
-}
-```
-
-Register in `src/config/routes.tsx`:
-
-```tsx
-import MyDemo from "../pages/my-demo/my-demo";
-
-{
-  path: "/my-demo",
-  label: "My Demo",
-  slug: "my-demo",
-  element: withShell("my-demo", MyDemo),
-},
-```
 
 ## Project structure
 
@@ -155,27 +125,3 @@ Not global — copy the block from an existing page and change the slug prefix:
 | `tab-bar`, `tab`, `tab--active`, `tab-panel` | `tab-data.css` |
 | `modal-overlay`, `modal-dialog` | `modal.css` |
 | `toast-container`, `toast`, `toast--*` | `toasts.css` |
-
-## Demos
-
-| Route | Topic |
-| --- | --- |
-| `/javascript` | Custom `Array.prototype.myMap` |
-| `/post-pagination` | Client-side pagination |
-| `/tab-data` | Multi-step tabs + validation |
-| `/post-search-debounce` | Debounced search |
-| `/infinite-scroll` | `IntersectionObserver` list |
-| `/modal` | `createPortal` modal |
-| `/toasts` | Context + toast portal |
-| `/dummy-page` | Scaffold example |
-
-## Troubleshooting
-
-| Problem | Fix |
-| --- | --- |
-| New page fast | `npm run create-page -- <name>` |
-| `create-page` already exists | New name, or delete `src/pages/<slug>/` + route entry |
-| Not in sidebar | Entry in `practiceRoutes` without `hideInNav: true` |
-| Styles not applying | Import `./<slug>.css`; prefix with `.practice-page--<slug>` |
-| Content too wide | Don't set `max-width` on the page root — shell handles it |
-| Build fails on `modal.tsx` | Pre-existing strict TS issue in that file |

@@ -45,7 +45,7 @@ export default function App() {
               {navOpen ? <IconChevronLeft /> : <IconChevronRight />}
             </button>
             <div className="app-sidebar__brand">
-              <span className="app-sidebar__title">Practice Apps</span>
+              <span className="app-sidebar__title">Frontend Practice Sandbox</span>
               <span className="app-sidebar__subtitle">React demos</span>
               <span className="app-sidebar__thumb" aria-hidden={navOpen}>
                 PA
