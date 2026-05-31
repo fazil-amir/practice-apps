@@ -1,16 +1,25 @@
-import type { ComponentType, ReactNode } from 'react';
+import { lazy, type ComponentType, type ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import PostPagination from '../pages/post-pagination/post-pagination';
-import TabData from '../pages/tab-data/tab-data';
-import Toasts from '../pages/toasts/toasts';
-import PostSearchDebounce from '../pages/post-search-debounce/post-search-debounce';
-import InfiniteScroll from '../pages/infinite-scroll/infinite-scroll';
-import Modal from '../pages/modal/modal';
-import ArrayPolyfills from '../pages/array-polyfills/array-polyfills';
-import Scoping from '../pages/scoping/scoping';
-import Promises from '../pages/promises/promises';
-import PromiseFetchWithRetry from '../pages/promise-fetch-with-retry/promise-fetch-with-retry';
+function lazyPage(loader: () => Promise<{ default: ComponentType }>) {
+  return lazy(loader);
+}
+
+const ArrayPolyfills = lazyPage(() => import('../pages/array-polyfills/array-polyfills'));
+const Scoping = lazyPage(() => import('../pages/scoping/scoping'));
+const Promises = lazyPage(() => import('../pages/promises/promises'));
+const PromiseFetchWithRetry = lazyPage(
+  () => import('../pages/promise-fetch-with-retry/promise-fetch-with-retry'),
+);
+const PostPagination = lazyPage(() => import('../pages/post-pagination/post-pagination'));
+const TabData = lazyPage(() => import('../pages/tab-data/tab-data'));
+const PostSearchDebounce = lazyPage(
+  () => import('../pages/post-search-debounce/post-search-debounce'),
+);
+const InfiniteScroll = lazyPage(() => import('../pages/infinite-scroll/infinite-scroll'));
+const Modal = lazyPage(() => import('../pages/modal/modal'));
+const Toasts = lazyPage(() => import('../pages/toasts/toasts'));
+
 export type PracticeRoute = {
   path: string;
   label: string;
@@ -34,7 +43,7 @@ function withShell(slug: string, Component: ComponentType) {
 
 /**
  * Single source of truth for routes and navigation.
- * Add a page: import from `src/pages/<slug>/<slug>.tsx`, optional `<slug>.css` for demo-only styles, register here.
+ * Add a page: lazy import from `src/pages/<slug>/<slug>.tsx`, optional `<slug>.css`, register here.
  */
 export const practiceRoutes: PracticeRoute[] = [
   {

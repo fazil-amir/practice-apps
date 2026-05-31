@@ -81,7 +81,7 @@ function updateRoutes(slug, componentName, label) {
     throw new Error(`Route for "${slug}" already exists in routes.tsx`);
   }
 
-  const importLine = `import ${componentName} from '../pages/${slug}/${slug}';`;
+  const importLine = `const ${componentName} = lazyPage(() => import('../pages/${slug}/${slug}'));\n`;
   const exportTypeIndex = content.indexOf('export type PracticeRoute');
 
   if (exportTypeIndex === -1) {

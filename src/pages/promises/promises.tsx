@@ -18,28 +18,39 @@ function runOnce(func: (...args: unknown[]) => unknown) {
 	};
 }
 
-const p1 = new Promise((resolve, reject) => {
-	const flag = true;
-	setTimeout(() => {
-		return flag ? resolve("Promise 1 resolved") : reject("Promise 1 rejected");
-	}, 1000);
-});
+function createDemoPromises() {
+	const p1 = new Promise((resolve, reject) => {
+		const flag = true;
+		setTimeout(() => {
+			return flag
+				? resolve("Promise 1 resolved")
+				: reject("Promise 1 rejected");
+		}, 1000);
+	});
 
-const p2 = new Promise((resolve, reject) => {
-	const flag = false;
-	setTimeout(() => {
-		return flag ? resolve("Promise 2 resolved") : reject("Promise 2 rejected");
-	}, 500);
-});
+	const p2 = new Promise((resolve, reject) => {
+		const flag = false;
+		setTimeout(() => {
+			return flag
+				? resolve("Promise 2 resolved")
+				: reject("Promise 2 rejected");
+		}, 500);
+	});
 
-const p3 = new Promise((resolve, reject) => {
-	const flag = true;
-	setTimeout(() => {
-		return flag ? resolve("Promise 3 resolved") : reject("Promise 3 rejected");
-	}, 2000);
-});
+	const p3 = new Promise((resolve, reject) => {
+		const flag = true;
+		setTimeout(() => {
+			return flag
+				? resolve("Promise 3 resolved")
+				: reject("Promise 3 rejected");
+		}, 2000);
+	});
+
+	return { p1, p2, p3 };
+}
 
 function promiseAll() {
+	const { p1, p2, p3 } = createDemoPromises();
 	return Promise.all([p1, p2, p3])
 		.then((results) => {
 			console.log(results);
@@ -50,6 +61,7 @@ function promiseAll() {
 }
 
 function promiseAny() {
+	const { p1, p2, p3 } = createDemoPromises();
 	return Promise.any([p1, p2, p3])
 		.then((result) => {
 			console.log(result);
@@ -60,6 +72,7 @@ function promiseAny() {
 }
 
 function promiseRace() {
+	const { p1, p2, p3 } = createDemoPromises();
 	return Promise.race([p1, p2, p3])
 		.then((result) => {
 			console.log(result);
@@ -70,6 +83,7 @@ function promiseRace() {
 }
 
 function promiseAllSettled() {
+	const { p1, p2, p3 } = createDemoPromises();
 	return Promise.allSettled([p1, p2, p3])
 		.then((results) => {
 			console.log(results);

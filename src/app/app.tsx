@@ -1,7 +1,17 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import { practiceRoutes, navRoutes } from '../config/routes';
 import './app.css';
+
+function PageLoadingFallback() {
+  return (
+    <main className="practice-page practice-page--loading">
+      <div className="practice-page__inner page-stack">
+        <p className="practice-status">Loading page…</p>
+      </div>
+    </main>
+  );
+}
 
 function getNavThumb(label: string) {
   const words = label.trim().split(/\s+/);
@@ -79,12 +89,14 @@ export default function App() {
         </aside>
 
         <main className="app-content">
-          <Routes>
-            {practiceRoutes.map(({ path, element }) => (
-              <Route key={path} path={path} element={element} />
-            ))}
-            <Route path="*" element={<Navigate to="/array-polyfills" replace />} />
-          </Routes>
+          <Suspense fallback={<PageLoadingFallback />}>
+            <Routes>
+              {practiceRoutes.map(({ path, element }) => (
+                <Route key={path} path={path} element={element} />
+              ))}
+              <Route path="*" element={<Navigate to="/array-polyfills" replace />} />
+            </Routes>
+          </Suspense>
         </main>
       </div>
     </div>
